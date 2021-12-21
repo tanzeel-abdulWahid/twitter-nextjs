@@ -14,14 +14,14 @@ import SidebarLink from "./SidebarLink"
 
 const Sidebar = () => {
     return (
-        <div className="hidden sm:flex flex-col items-center xl:w-[340px]
+        <div className="hidden sm:flex flex-col items-center xl:items-start xl:w-[340px]
         p-2 fixed h-full">
             <div className="flex items-center justify-center w-14 h-14
             hoverAnimation p-0 xl:ml-24">
                 <Image src="https://rb.gy/ogau5a" width={30} height={30}/>
             </div>
 
-            <div className="space-y-0 mt-2 mb-2.5 xl:ml-24">
+            <div className="mt-2 mb-2 xl:ml-24">
                 <SidebarLink text="Home" Icon={HomeIcon} active />
                 <SidebarLink text="Explore" Icon={HashtagIcon} />
                 <SidebarLink text="Notifications" Icon={BellIcon} />
@@ -33,10 +33,10 @@ const Sidebar = () => {
             </div>
 
             <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white
-            rounded-full w-56 h-[52px] text-lg font-bold">Tweet</button>
+            rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">Tweet</button>
         
             <div className="text-[#d9d9d9] flex items-center justify-center
-            hoverAnimation xl:ml-20  mt-auto">
+            hoverAnimation xl:ml-24  mt-auto">
                 <img className="bg-white w-10 h-10 rounded-full xl:mr-2.5" src="https://icon-library.com/images/facebook-f-icon-png/facebook-f-icon-png-19.jpg" alt="" />
                 <div className="hidden xl:inline leading-5">
                     <h4 className="font-bold">tanzeel</h4>
