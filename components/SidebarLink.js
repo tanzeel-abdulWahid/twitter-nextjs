@@ -10,3 +10,4 @@ const SidebarLink = ({text, Icon, active}) => {
 }
 
 export default SidebarLink
+

@@ -1,0 +1,5 @@
+-tailwind global classes
+-use of useRef in components/input.js
+-emoji picker
+-firebase setup/ adding data/images in firestore/storage;
+-fileReader se file reading and setting in state 
