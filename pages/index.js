@@ -2,7 +2,39 @@ import Head from 'next/head'
 import Feed from '../components/Feed'
 import Sidebar from '../components/Sidebar'
 
-export default function Home() {
+import { getProviders , getSession, useSession } from "next-auth/react";
+import Login from '../components/Login';
+import { useState,useEffect } from 'react';
+
+export default function Home(trendingResults,followResults) {
+
+  const { data: session } = useSession();
+  
+  // const [providers, setProviders] = useState(null);
+  
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await getProviders();
+  //     setProviders(res);
+  //   }) () ;
+  // }, [])
+  // console.log(providers);
+
+  const providers = [
+    {
+      callbackUrl: "http://localhost:3000/api/auth/callback/google",
+      id: "google",
+      name: "Google",
+      signinUrl: "http://localhost:3000/api/auth/signin/google",
+      type: "oauth",
+    },
+  ]
+
+  if (!session) {
+    return <Login providers={providers}/>
+  }
+
+
   return (
     <div>
       <Head>
@@ -23,4 +55,24 @@ export default function Home() {
 
     </div>
   )
+};
+
+export async function getServerSideProps(context) {
+  const trendingResults = await fetch("https://jsonkeeper.com/b/NKEV").then(
+    (res) => res.json()
+  );
+  const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(
+    (res) => res.json()
+  );
+  // const providers = await getProviders();
+  const session = await getSession(context);
+
+  return {
+    props: {
+      trendingResults,
+      followResults,
+      // providers,
+      session,
+    },
+  };
 }

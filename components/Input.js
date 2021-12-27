@@ -6,8 +6,13 @@ import "emoji-mart/css/emoji-mart.css";
 import { db, storage } from "../firebase";
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { useSession } from "next-auth/react";
 
 const Input = () => {
+
+    const { data: session } = useSession();
+
+
     const [input, setInput] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
     const [showEmojis, setShowEmojis] = useState(false);
@@ -20,13 +25,12 @@ const Input = () => {
         setLoading(true);
 
         const docRef = await addDoc(collection(db, "posts"), {
-            // id:session.user.id,
-            // username: session.user.name,
-            // userImg: session.user.image,
-            // tag: session.user.tag,
+            id:session.user.uid,
+            username: session.user.name,
+            userImg: session.user.image,
+            tag: session.user.tag,
             text: input,
             timestamp: serverTimestamp(),
-
         });
 
         const imageRef = ref(storage, `posts/${docRef.id}/image`);
@@ -77,7 +81,7 @@ const Input = () => {
         >
             <img
                 className="bg-white w-11 h-10 rounded-full cursor-pointer"
-                src="https://icon-library.com/images/facebook-f-icon-png/facebook-f-icon-png-19.jpg"
+                src={session.user.image}
                 alt=""
             />
 

@@ -3,3 +3,4 @@
 -emoji picker
 -firebase setup/ adding data/images in firestore/storage;
 -fileReader se file reading and setting in state 
+- Google auth with next auth

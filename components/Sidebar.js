@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { HomeIcon } from "@heroicons/react/solid";
+
 import {
     HashtagIcon,
     BellIcon,
@@ -11,8 +12,10 @@ import {
     DotsHorizontalIcon,
 } from "@heroicons/react/outline";
 import SidebarLink from "./SidebarLink"
+import { signOut, useSession } from "next-auth/react";
 
 const Sidebar = () => {
+    const { data: session } = useSession();
     return (
         <div className="hidden sm:flex flex-col items-center xl:items-start xl:w-[340px]
         p-2 fixed h-full">
@@ -36,11 +39,13 @@ const Sidebar = () => {
             rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">Tweet</button>
         
             <div className="text-[#d9d9d9] flex items-center justify-center
-            hoverAnimation xl:ml-24  mt-auto">
-                <img className="bg-white w-10 h-10 rounded-full xl:mr-2.5" src="https://icon-library.com/images/facebook-f-icon-png/facebook-f-icon-png-19.jpg" alt="" />
+            hoverAnimation xl:ml-24  mt-auto" 
+            onClick={signOut}>
+                <img className="bg-white w-10 h-10 rounded-full xl:mr-2.5" 
+                src={session.user.image} alt="" />
                 <div className="hidden xl:inline leading-5">
-                    <h4 className="font-bold">tanzeel</h4>
-                    <p className="text-[#6e767d]">tanzeel</p>
+                    <h4 className="font-bold">{session.user.name}</h4>
+                    <p className="text-[#6e767d]">@{session.user.tag}</p>
                 </div>
                 <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10" />
             </div>
